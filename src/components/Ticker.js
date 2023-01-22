@@ -4,8 +4,7 @@ import { makeRandomNumber } from "../utils"
 function Ticker() {
   const [price, setPrice] = useState(0)
   const [color, setColor] = useState("black")
-
-  // create the ref and set the initial value
+  // create the ref and set its initial value
   const prevPriceRef = useRef(price)
 
   useEffect(() => {
@@ -18,14 +17,12 @@ function Ticker() {
     } else {
       setColor("black")
     }
-    // set the ref to the new value (doesnt trigger re-render)
+    // set the new value of the ref (note: this doesn't trigger a re-render)
     prevPriceRef.current = price
   }, [price])
 
   useEffect(() => {
-    // Effect
     const id = setInterval(() => setPrice(makeRandomNumber), 1000)
-    // Cleanup
     return function cleanup() {
       clearInterval(id)
     }
